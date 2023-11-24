@@ -1,8 +1,8 @@
-﻿using TesteCovid.Presentation.ViewModel;
+﻿using TesteCovid.Presentation.Models;
 
 namespace TesteCovid.Presentation.Services.Interface;
 
 public interface IListCovidRepostByCountryService
 {
-    Task<IList<ListCovidReportByCountryViewModel>> ListCovidReport();
+    Task<ApiCovidResponse> ListCovidReport();
 }

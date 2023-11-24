@@ -7,10 +7,9 @@ namespace TesteCovid.Presentation.Services;
 
 public class ListCovidRepostByCountryService : IListCovidRepostByCountryService
 {
-    public async Task<IList<ListCovidReportByCountryViewModel>> ListCovidReport()
+    public async Task<ApiCovidResponse> /*Task<IList<ListCovidReportByCountryViewModel>>*/ ListCovidReport()
     {
         var urlBase = "https://api.covid19api.com/summary";
-        var itensPorPagina = 10;
 
         using (HttpClient client = new HttpClient())
         {
@@ -19,19 +18,23 @@ public class ListCovidRepostByCountryService : IListCovidRepostByCountryService
                 var jsonResponse = await client.GetStringAsync(urlBase);
                 var objectResponse = JsonSerializer.Deserialize<ApiCovidResponse>(jsonResponse);
 
-                if (objectResponse is null)
-                    return new List<ListCovidReportByCountryViewModel>();
+                //if (objectResponse is null)
+                //    return new List<ListCovidReportByCountryViewModel>();
 
-                var listViewModel = objectResponse.Countries
-                    .Select(country => new ListCovidReportByCountryViewModel(
-                                            country.Country,
-                                            country.TotalConfirmed - country.TotalRecovered)).ToList();
+                return objectResponse;
 
-                var posicao = 1;
-                foreach (var viewModel in listViewModel.OrderByDescending(c => c.TotalCasosAtivos).Take(itensPorPagina))
-                    viewModel.ChangePosicaoRanking(posicao++);
+                //var listViewModel = objectResponse.Countries
+                //    .Select(country => new ListCovidReportByCountryViewModel(
+                //                            country.Country,
+                //                            country.TotalConfirmed - country.TotalRecovered)).ToList();
 
-                return listViewModel;
+                //var posicao = 1;
+                //foreach (var viewModel in listViewModel.OrderByDescending(c => c.TotalCasosAtivos).Take(itensPorPagina))
+                //    viewModel.ChangePosicaoRanking(posicao++);
+
+                //return listViewModel
+                //    .OrderByDescending(l => l.PosicaoRanking)
+                //    .ToList();
             }
             catch (Exception ex)
             {

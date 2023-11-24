@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
-
-namespace TesteCovid.Presentation.ViewModel;
+﻿namespace TesteCovid.Presentation.ViewModel;
 
 public class ListCovidReportByCountryViewModel
 {
