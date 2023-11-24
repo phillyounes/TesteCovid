@@ -10,6 +10,7 @@ public class ListCovidRepostByCountryService : IListCovidRepostByCountryService
     public async Task<IList<ListCovidReportByCountryViewModel>> ListCovidReport()
     {
         var urlBase = "https://api.covid19api.com/summary";
+        var itensPorPagina = 10;
 
         using (HttpClient client = new HttpClient())
         {
@@ -27,7 +28,7 @@ public class ListCovidRepostByCountryService : IListCovidRepostByCountryService
                                             country.TotalConfirmed - country.TotalRecovered)).ToList();
 
                 var posicao = 1;
-                foreach (var viewModel in listViewModel.OrderByDescending(c => c.TotalCasosAtivos).Take(10))
+                foreach (var viewModel in listViewModel.OrderByDescending(c => c.TotalCasosAtivos).Take(itensPorPagina))
                     viewModel.ChangePosicaoRanking(posicao++);
 
                 return listViewModel;

@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using TesteCovid.Presentation.Models;
 using TesteCovid.Presentation.Services.Interface;
 using TesteCovid.Presentation.ViewModel;
 
